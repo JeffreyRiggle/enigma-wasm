@@ -1,0 +1,9 @@
+/enigmajs/dist/
+/enigmajs/node_modules/
+
+/enigmarust/enigmawasm/target/
+/enigmarust/enigmawasm/node_modules/
+/enigmarust/enigmawasm/package-lock.json
+/enigmarust/enigmawasm/Cargo.lock
+
+/enigmasite/node_modules/

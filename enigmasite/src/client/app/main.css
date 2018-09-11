@@ -1,0 +1,58 @@
+.enigma {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.enigma .rotor-area {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+}
+
+.reflector,
+.rotor {
+    display: flex;
+    flex-direction: row;
+    margin: 4px;
+}
+
+.reflector-option,
+.rotor-wheel {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.rotor-position {
+    color: green;
+}
+
+.rotor-preview {
+    color: grey;
+}
+
+.reflector-option-move-area,
+.rotor-move-area {
+    margin-left: 4px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.rotor-move-btn {
+    flex: 1 1 auto;
+}
+
+.rotor-move-btn + .rotor-move-btn {
+    margin-top: 4px;
+}
+
+.lamp {
+    margin: 4px;
+}
+
+.lamp .row span {
+    padding: 8px;
+}
