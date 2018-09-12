@@ -1,27 +1,44 @@
 import React from 'react';
+import {alphabetRow1, alphabetRow2, alphabetRow3} from './config.js';
 
 export class Lamp extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            selected: 'A'
-        }
+        this.state = {};
+        this.boundChangeLamp = this.changeLamp.bind(this);
+        this.props.engine.on(this.props.engine.messageProcessedEvent, this.boundChangeLamp);
+    }
+
+    changeLamp(message) {
+        this.setState({
+            selected: message
+        });
     }
 
     render() {
         return (
             <div className="lamp">
                 <div className="row">
-                    <span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span><span>i</span>
+                    {alphabetRow1.map(letter => 
+                        <span className={letter === this.state.selected ? 'selected' : ''}>{letter}</span>
+                    )}
                 </div>
                 <div className="row">
-                    <span>j</span><span>k</span><span>l</span><span>m</span><span>n</span><span>o</span><span>p</span><span>q</span>
+                    {alphabetRow2.map(letter => 
+                        <span className={letter === this.state.selected ? 'selected' : ''}>{letter}</span>
+                    )}
                 </div>
                 <div className="row">
-                   <span>r</span><span>s</span><span>t</span><span>u</span><span>v</span><span>w</span><span>x</span><span>y</span><span>z</span>
+                    {alphabetRow3.map(letter => 
+                        <span className={letter === this.state.selected ? 'selected' : ''}>{letter}</span>
+                    )}
                 </div>
             </div>
         );
+    }
+
+    componentWillUnmount() {
+        this.props.engine.off(this.props.engine.messageProcessedEvent, this.boundChangeLamp);
     }
 }

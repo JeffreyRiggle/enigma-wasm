@@ -84,23 +84,18 @@ export class Enigma {
         let letter = initialLetter;
 
         letter = this.plugboard.shift(letter);
-        console.log('Initial letter: ', initialLetter, 'shifted letter: ', letter);
 
         this.rotors.forEach((rotor) => {
             letter = rotor.shift(letter);
-            console.log('Initial letter: ', initialLetter, 'shifted letter: ', letter);
         });
 
         letter = this._reflect(letter);
-        console.log('Initial letter: ', initialLetter, 'shifted letter: ', letter);
 
         this.rotors.reverse().forEach((rotor) => {
             letter = rotor.unshift(letter);
-            console.log('Initial letter: ', initialLetter, 'shifted letter: ', letter);
         });
 
         letter = this.plugboard.shift(letter);
-        console.log('Initial letter: ', initialLetter, 'shifted letter: ', letter);
 
         this._moveRotors();
 

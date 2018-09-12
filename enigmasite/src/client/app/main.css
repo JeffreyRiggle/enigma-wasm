@@ -53,6 +53,22 @@
     margin: 4px;
 }
 
+.lamp .row {
+    margin-bottom: 8px;
+}
+
+.lamp .row:nth-last-of-type(2n) {
+    margin-left: 8px;
+}
+
 .lamp .row span {
-    padding: 8px;
+    line-height: 16px;
+    padding: 0 6px;
+    margin-right: 4px;
+    border-radius: 100%;
+    border: 1px solid black;
+}
+
+.lamp .row .selected {
+    background-color: lightgoldenrodyellow;
 }
