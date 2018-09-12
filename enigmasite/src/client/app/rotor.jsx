@@ -8,7 +8,7 @@ export class Rotor extends React.Component {
             position: 'A',
             nextPosition: 'B',
             lastPosition: 'Z'
-        }
+        };
 
         this.boundUpdate = this.updateRotor.bind(this);
         this.rotor = this.props.engine.getRotor(this.props.ring);
@@ -17,18 +17,28 @@ export class Rotor extends React.Component {
     }
 
     moveRotorDown() {
-        this.props.engine.setRotor(this.props.ring, this.props.rotorType, this.state.position);
-        updateRotor();
+        let pos = this.rotor.position.charCodeAt(0) - 65;
+        let next = this.rotor.position === 'Z' ? 'A' : String.fromCharCode(65 + (pos + 1));
+
+        this.props.engine.setRotor(this.props.ring, this.props.rotorType, next);
+        this.updateRotor(true);
     }
 
     moveRotorUp() {
-        this.props.engine.setRotor(this.props.ring, this.props.rotorType, this.state.position);
-        updateRotor();
+        let pos = this.rotor.position.charCodeAt(0) - 65;
+        let last = this.rotor.position === 'A' ? 'Z' : String.fromCharCode(65 + (pos - 1));
+
+        this.props.engine.setRotor(this.props.ring, this.props.rotorType, last);
+        this.updateRotor(true);
     }
 
-    updateRotor() {
+    updateRotor(refresh) {
+        if (refresh) {
+            this.rotor = this.props.engine.getRotor(this.props.ring);
+        }
+
         let pos = this.rotor.position.charCodeAt(0) - 65;
-        let next = String.fromCharCode(65 + (pos + 1));
+        let next = this.rotor.position === 'Z' ? 'A' : String.fromCharCode(65 + (pos + 1));
         let last = this.rotor.position === 'A' ? 'Z' : String.fromCharCode(65 + (pos - 1));
 
         this.setState({

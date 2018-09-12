@@ -23,7 +23,18 @@ class JSEngine extends EventEmitter {
     }
 
     setRotor(ring, type, position) {
+        this.config.rotors.forEach(rotor => {
+            if (rotor.ring === ring) {
+                rotor.type = type;
+                rotor.position = position;
+            }
+        });
 
+        console.log('New config: ', this.config);
+        engine.configure(this.config);
+        this.originalMessage = '';
+        this.encryptedMessage = '';
+        this.emit(this.messageProcessedEvent, '');
     }
 
     setReflector(type) {
