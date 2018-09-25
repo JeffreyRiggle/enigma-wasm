@@ -72,3 +72,28 @@
 .lamp .row .selected {
     background-color: lightgoldenrodyellow;
 }
+
+.plugboard {
+    display: flex;
+    flex-direction: column;
+}
+
+.plug-row {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+}
+
+.plug {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+}
+
+.plug-mapped-value {
+    background-color: aqua;
+}
+
+.error {
+    border: 1px solid red;
+}

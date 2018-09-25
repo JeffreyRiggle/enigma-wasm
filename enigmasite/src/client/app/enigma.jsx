@@ -1,8 +1,9 @@
 import React from 'react';
-import {Rotor} from './rotor.jsx';
-import {Reflector} from './reflector.jsx';
-import {Lamp} from './lamp.jsx';
+import { Rotor } from './rotor.jsx';
+import { Reflector } from './reflector.jsx';
+import { Lamp } from './lamp.jsx';
 import { Keyboard } from './keyboard.jsx';
+import { Plugboard } from './plugboard.jsx';
 import './main.css';
 
 export class EnigmaView extends React.Component {
@@ -24,7 +25,7 @@ export class EnigmaView extends React.Component {
                     <Keyboard engine={this.props.engine}/>
                 </div>
                 <div>
-                    <div>Plugboard</div>
+                    <Plugboard engine={this.props.engine}/>
                 </div>
             </div>
         );
