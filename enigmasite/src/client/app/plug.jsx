@@ -5,7 +5,7 @@ export class Plug extends React.Component {
         super(props);
 
         this.state = {
-            mappedLetter: ' ',
+            mappedLetter: '',
             edit: false
         };
 
@@ -64,7 +64,7 @@ export class Plug extends React.Component {
     render() {
         return (
             <div className="plug">
-                <div>{this.props.letter}</div>
+                <div className="plug-key">{this.props.letter}</div>
                 {this.renderValue()}
             </div>
         )
@@ -72,14 +72,14 @@ export class Plug extends React.Component {
 
     renderValue() {
         if (this.state.edit) {
-            return <input type="text" 
+            return <input type="text"
                           onBlur={this.boundEdit} 
                           onChange={this.boundChange}
                           onKeyPress={this.boundPress}
-                          className={this.state.error ? 'error' : ''}
+                          className={this.state.error ? 'max-plug-size error' : 'max-plug-size'}
                           maxLength="1"></input>
         }
 
-        return <button className={this.state.mappedLetter ? '' : ''} onClick={this.boundEdit}>{this.state.mappedLetter}</button>
+        return <button className={this.state.mappedLetter ? '' : 'min-plug-size'} onClick={this.boundEdit}>{this.state.mappedLetter}</button>
     }
 }

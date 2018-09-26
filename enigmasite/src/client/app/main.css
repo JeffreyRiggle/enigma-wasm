@@ -82,6 +82,11 @@
     display: flex;
     flex-direction: row;
     flex: 1 1 auto;
+    margin-bottom: 8px;
+}
+
+.plug-row:nth-of-type(2n) {
+    margin-left: 8px;
 }
 
 .plug {
@@ -96,4 +101,18 @@
 
 .error {
     border: 1px solid red;
+}
+
+.min-plug-size {
+    min-height: 21px;
+    min-width: 24px;
+}
+
+.max-plug-size {
+    max-height: 21px;
+    max-width: 24px;
+}
+
+.plug-key {
+    text-align: center;
 }
