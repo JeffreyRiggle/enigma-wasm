@@ -12,6 +12,26 @@ export class Plug extends React.Component {
         this.boundEdit = this.toggleEdit.bind(this);
         this.boundChange = this.handleChange.bind(this);
         this.boundPress = this.handlePress.bind(this);
+        this.props.manager.on(this.props.manager.plugsChanged, this.onPlugsChanged.bind(this));
+    }
+
+    onPlugsChanged(changeEvent) {
+        let newLetter;
+
+        if (this.props.letter === changeEvent.key) {
+            newLetter = changeEvent.value;
+        } else if (this.props.letter === changeEvent.value) {
+            newLetter = changeEvent.key;
+        }
+
+        if (!newLetter) {
+            return;
+        }
+
+        this.setState({
+            mappedLetter: newLetter,
+            error: false
+        });
     }
 
     toggleEdit() {
@@ -22,15 +42,14 @@ export class Plug extends React.Component {
 
     handleChange(event) {
         let letter = event.target.value.toUpperCase();
-        let errored = false;
 
-        if (letter === this.props.letter) {
-            errored = true;
+        if (this.props.manager.validatePlug(this.props.letter, letter)) {
+            this.props.manager.setPlug(this.props.letter, letter);
+            return;
         }
 
         this.setState({
-            mappedLetter: errored ? '' : letter,
-            error: false
+            error: true
         });
     }
 

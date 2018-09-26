@@ -30,11 +30,7 @@ class JSEngine extends EventEmitter {
             }
         });
 
-        console.log('New config: ', this.config);
-        engine.configure(this.config);
-        this.originalMessage = '';
-        this.encryptedMessage = '';
-        this.emit(this.messageProcessedEvent, '');
+        this._configureImpl();
     }
 
     setReflector(type) {
@@ -42,7 +38,26 @@ class JSEngine extends EventEmitter {
     }
 
     setPlugboard(plugs) {
+        if (!plugs) {
+            return;
+        }
 
+        let transformedPlugs = [];
+
+        plugs.forEach((value, key, map) => {
+            transformedPlugs.push(value+key);
+        });
+
+        this.config.plugboard = transformedPlugs;
+        this._configureImpl();
+    }
+
+    _configureImpl() {
+        console.log('New config: ', this.config);
+        engine.configure(this.config);
+        this.originalMessage = '';
+        this.encryptedMessage = '';
+        this.emit(this.messageProcessedEvent, '');
     }
 
     sendMessage(message) {
