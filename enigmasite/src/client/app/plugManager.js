@@ -1,5 +1,7 @@
 import { EventEmitter } from 'events';
 
+const validInput = /[A-Z]/;
+
 export class PlugManager extends EventEmitter {
     constructor() {
         super();
@@ -19,6 +21,10 @@ export class PlugManager extends EventEmitter {
             return true;
         }
 
+        if (!validInput.test(value)) {
+            return false;
+        }
+        
         let retVal = true;
 
         this.plugs.forEach((val, k, map) => {
@@ -35,16 +41,22 @@ export class PlugManager extends EventEmitter {
     }
 
     setPlug(key, value) {
-        if (!value) {
-            this.plugs.delete(key);
-            return;
-        }
-
         if (!this.validatePlug(key, value)) {
             return;
         }
 
-        this.plugs.set(key, value);
-        this.emit(this.plugsChanged, {key: key, value: value, map: this.plugs});
+        if (value) {
+            this.plugs.set(key, value);
+            this.emit(this.plugsChanged, {key: key, value: value, map: this.plugs});
+            return;
+        }
+
+        let foundValue = this.plugs.get(key);
+        if (!foundValue) {
+            return;
+        }
+        
+        this.plugs.delete(key);
+        this.emit(this.plugsChanged, {key: key, value: foundValue, map: this.plugs, removed: true});
     }
 }

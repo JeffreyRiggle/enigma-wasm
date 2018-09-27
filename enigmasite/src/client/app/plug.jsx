@@ -22,14 +22,12 @@ export class Plug extends React.Component {
             newLetter = changeEvent.value;
         } else if (this.props.letter === changeEvent.value) {
             newLetter = changeEvent.key;
-        }
-
-        if (!newLetter) {
+        } else {
             return;
         }
 
         this.setState({
-            mappedLetter: newLetter,
+            mappedLetter: changeEvent.removed ? '' : newLetter,
             error: false
         });
     }
@@ -73,11 +71,13 @@ export class Plug extends React.Component {
     renderValue() {
         if (this.state.edit) {
             return <input type="text"
+                          defaultValue={this.state.mappedLetter}
                           onBlur={this.boundEdit} 
                           onChange={this.boundChange}
                           onKeyPress={this.boundPress}
                           className={this.state.error ? 'max-plug-size error' : 'max-plug-size'}
-                          maxLength="1"></input>
+                          maxLength="1"
+                          autoFocus/>
         }
 
         return <button className={this.state.mappedLetter ? '' : 'min-plug-size'} onClick={this.boundEdit}>{this.state.mappedLetter}</button>
