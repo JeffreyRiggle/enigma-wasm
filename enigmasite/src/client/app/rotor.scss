@@ -1,0 +1,40 @@
+@import 'common';
+
+.reflector,
+.rotor {
+    display: flex;
+    flex-direction: row;
+    margin: $default-padding;
+
+    .reflector-option,
+    .rotor-wheel {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .rotor-position {
+        color: green;
+    }
+    
+    .rotor-preview {
+        color: grey;
+    }
+
+    .reflector-option-move-area,
+    .rotor-move-area {
+        margin-left: $default-padding;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .rotor-move-btn {
+        flex: 1 1 auto;
+    }
+    
+    .rotor-move-btn + .rotor-move-btn {
+        margin-top: $default-padding;
+    }
+}

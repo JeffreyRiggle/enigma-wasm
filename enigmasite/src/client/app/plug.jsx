@@ -1,4 +1,5 @@
 import React from 'react';
+import './plug.scss';
 
 export class Plug extends React.Component {
     constructor(props) {

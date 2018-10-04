@@ -26,11 +26,8 @@ var config = {
             loader: 'babel-loader'
         },
         {
-            test: /\.css$/,
-            loader: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: ['css-loader']
-            })
+            test: /\.scss$/,
+            loader: 'style-loader!css-loader!sass-loader'
         }
     ]
   },

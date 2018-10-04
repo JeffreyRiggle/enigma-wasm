@@ -1,0 +1,23 @@
+.plug {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+}
+
+.plug-mapped-value {
+    background-color: aqua;
+}
+
+.min-plug-size {
+    min-height: 21px;
+    min-width: 24px;
+}
+
+.max-plug-size {
+    max-height: 21px;
+    max-width: 24px;
+}
+
+.plug-key {
+    text-align: center;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import {alphabetRow1, alphabetRow2, alphabetRow3} from './config.js';
+import './lamp.scss';
 
 export class Lamp extends React.Component {
     constructor(props) {

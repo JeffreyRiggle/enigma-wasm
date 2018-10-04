@@ -1,4 +1,5 @@
 import React from 'react';
+import './rotor.scss';
 
 export class Rotor extends React.Component {
     constructor(props) {

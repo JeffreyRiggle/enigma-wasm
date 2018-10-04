@@ -1,0 +1,16 @@
+@import 'common';
+
+.enigma {
+    border: $default-border;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    align-items: center;
+    margin: auto;
+
+    .rotor-area {
+        display: flex;
+        flex-direction: row;
+        flex: 1 1 auto;
+    }
+}

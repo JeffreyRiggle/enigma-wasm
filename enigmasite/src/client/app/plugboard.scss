@@ -1,0 +1,17 @@
+@import 'common';
+
+.plugboard {
+    display: flex;
+    flex-direction: column;
+
+    .plug-row {
+        display: flex;
+        flex-direction: row;
+        flex: 1 1 auto;
+        margin-bottom: $large-padding;
+    }
+
+    .plug-row:nth-of-type(2n) {
+        margin-left: $large-padding;
+    }
+}

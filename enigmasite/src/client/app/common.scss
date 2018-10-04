@@ -1,0 +1,30 @@
+$default-border-size: 1px;
+$default-border: $default-border-size solid black;
+$default-padding: 4px;
+$large-padding: 8px;
+
+.error {
+    border: $default-border-size solid red;
+}
+
+.result-container {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row;
+    margin-top: $large-padding;
+
+    .result-area {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+
+        .output {
+            height: 300px;
+            cursor: default;
+        }
+    }
+}
+
+textarea {
+    resize: none;
+}

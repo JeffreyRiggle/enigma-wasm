@@ -2,6 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {EnigmaView} from './enigma.jsx';
 import jsEngine from './jsEngine';
+import './common.scss';
 
 class App extends React.Component {
     constructor(props) {
@@ -24,13 +25,15 @@ class App extends React.Component {
             <div>
                 <h1>Simple Enigma Interface</h1>
                 <EnigmaView engine={jsEngine}/>
-                <div>
-                    <label>Input</label>
-                    <textarea value={this.state.originalMessage} readOnly={true}/>
-                </div>
-                <div>
-                    <label>Output</label>
-                    <textarea value={this.state.encryptedMessage} readOnly={true}/>
+                <div className="result-container">
+                    <div className="result-area">
+                        <label>Input</label>
+                        <textarea value={this.state.originalMessage} readOnly={true} className="output"/>
+                    </div>
+                    <div className="result-area">
+                        <label>Output</label>
+                        <textarea value={this.state.encryptedMessage} readOnly={true} className="output"/>
+                    </div>
                 </div>
             </div>
         );

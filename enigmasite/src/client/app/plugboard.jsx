@@ -2,6 +2,7 @@ import React from 'react';
 import {alphabetRow1, alphabetRow2, alphabetRow3} from './config.js';
 import { Plug } from './plug.jsx';
 import { PlugManager } from './plugManager.js';
+import './plugboard.scss';
 
 export class Plugboard extends React.Component {
     constructor(props) {

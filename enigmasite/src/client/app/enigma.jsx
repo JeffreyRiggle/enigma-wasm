@@ -4,7 +4,7 @@ import { Reflector } from './reflector.jsx';
 import { Lamp } from './lamp.jsx';
 import { Keyboard } from './keyboard.jsx';
 import { Plugboard } from './plugboard.jsx';
-import './main.css';
+import './enigma.scss';
 
 export class EnigmaView extends React.Component {
     constructor(props) {
