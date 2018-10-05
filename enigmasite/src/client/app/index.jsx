@@ -1,43 +1,30 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {EnigmaView} from './enigma.jsx';
-import jsEngine from './jsEngine';
+import {BrowserRouter, Link, Route} from 'react-router-dom';
+
+import {EnigmaJS} from './enigmaJS.jsx';
+import {EnigmaRust} from './enigmaRust.jsx';
 import './common.scss';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-
-        this.boundMessageChanged = this.messageChanged.bind(this);
-        jsEngine.on(jsEngine.messageProcessedEvent, this.boundMessageChanged);
-    }
-
-    messageChanged() {
-        this.setState({
-            originalMessage: jsEngine.originalMessage,
-            encryptedMessage: jsEngine.encryptedMessage
-        });
-    }
-
+export class App extends React.Component {
     render () {
         return (
             <div>
-                <h1>Simple Enigma Interface</h1>
-                <EnigmaView engine={jsEngine}/>
-                <div className="result-container">
-                    <div className="result-area">
-                        <label>Input</label>
-                        <textarea value={this.state.originalMessage} readOnly={true} className="output"/>
-                    </div>
-                    <div className="result-area">
-                        <label>Output</label>
-                        <textarea value={this.state.encryptedMessage} readOnly={true} className="output"/>
-                    </div>
-                </div>
+                <ul>
+                    <li><Link to="/js">Javascript Engine</Link></li>
+                    <li><Link to="/rust">Rust Engine</Link></li>
+                </ul>
             </div>
         );
     }
 }
 
-render(<App/>, document.getElementById('app'));
+render((
+    <BrowserRouter basename="/">
+        <div>
+            <App/>
+            <Route path="/js" component={EnigmaJS}/>
+            <Route path="/rust" component={EnigmaRust}/>
+        </div>
+    </BrowserRouter>
+), document.getElementById('app'));
