@@ -58,8 +58,8 @@ export class Rotor extends React.Component {
                     <span className="rotor-preview">{this.state.lastPosition}</span>
                 </div>
                 <div className="rotor-move-area">
-                    <button onClick={this.moveRotorUp.bind(this)} className="rotor-move-btn">up</button>
-                    <button onClick={this.moveRotorDown.bind(this)} className="rotor-move-btn">down</button>
+                    <button onClick={this.moveRotorUp.bind(this)} className="rotor-move-btn"><i className="fa fa-arrow-up"></i></button>
+                    <button onClick={this.moveRotorDown.bind(this)} className="rotor-move-btn"><i className="fa fa-arrow-down"></i></button>
                 </div>
             </div>
         );

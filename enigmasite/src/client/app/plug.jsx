@@ -81,6 +81,10 @@ export class Plug extends React.Component {
                           autoFocus/>
         }
 
-        return <button className={this.state.mappedLetter ? '' : 'min-plug-size'} onClick={this.boundEdit}>{this.state.mappedLetter}</button>
+        if (this.state.mappedLetter) {
+            return <button onClick={this.boundEdit}>{this.state.mappedLetter}</button>    
+        }
+
+        return <button className="min-plug-size" onClick={this.boundEdit}><i className="fa fa-circle-o"></i></button>
     }
 }

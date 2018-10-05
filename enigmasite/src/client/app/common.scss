@@ -1,3 +1,7 @@
+@import "../../../node_modules/font-awesome/scss/variables";
+$fa-font-path: "../../../node_modules/font-awesome/fonts";
+@import "../../../node_modules/font-awesome/scss/font-awesome";
+
 $default-border-size: 1px;
 $default-border: $default-border-size solid black;
 $default-padding: 4px;

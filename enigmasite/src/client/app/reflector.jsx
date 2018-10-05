@@ -24,8 +24,8 @@ export class Reflector extends React.Component {
                     <span>{this.state.reflector}</span>
                 </div>
                 <div className="reflector-option-move-area">
-                    <button onClick={this.moveUp.bind(this)} className="rotor-move-btn">next</button>
-                    <button onClick={this.moveDown.bind(this)} className="rotor-move-btn">last</button>
+                    <button onClick={this.moveUp.bind(this)} className="rotor-move-btn"><i className="fa fa-arrow-up"></i></button>
+                    <button onClick={this.moveDown.bind(this)} className="rotor-move-btn"><i className="fa fa-arrow-down"></i></button>
                 </div>
             </div>
         );
