@@ -12,6 +12,12 @@ export class EnigmaView extends React.Component {
     }
 
     render () {
+        if (!this.props.engine.loaded) {
+            return (
+                <div><h1>Loading...</h1></div>
+            )
+        }
+        
         return (
             <div className="enigma">
                 <div className="rotor-area">

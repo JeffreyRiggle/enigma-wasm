@@ -48,6 +48,26 @@ var config = {
         {
           test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
           loader: "url-loader?limit=10000&mimetype=image/svg+xml"
+        },
+        {
+            test:/\.rs?$/,
+            use: [
+                {
+                    loader: 'babel-loader',
+                    options: {
+                        compact: true
+                    }
+                },
+                {
+                    loader: 'rust-native-wasm-loader',
+                    options: {
+                        release: false,
+                        wasmBindgen: {
+                            wasm2es6js: true
+                        }
+                    }
+                }
+            ]
         }
     ]
   },

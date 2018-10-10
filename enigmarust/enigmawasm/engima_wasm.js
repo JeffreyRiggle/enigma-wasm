@@ -1,5 +1,5 @@
 /* tslint:disable */
-import * as wasm from './engima_wasm_bg';
+import * as wasm from './engima_wasm_bg.wasm';
 
 const TextEncoder = typeof self === 'object' && self.TextEncoder
     ? self.TextEncoder

@@ -21,7 +21,7 @@ export class EnigmaJS extends React.Component {
     render () {
         return (
             <div>
-                <h1>Simple Enigma Interface</h1>
+                <h1>JS Enigma</h1>
                 <EnigmaView engine={jsEngine}/>
                 <div className="result-container">
                     <div className="result-area">

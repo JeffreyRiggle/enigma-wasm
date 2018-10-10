@@ -1,31 +1,36 @@
-import { Enigma } from "../../../../enigmajs/src/enigma";
 import { EventEmitter } from 'events';
+const engimaLoader = import('../../../../enigmarust/enigmawasm/src/lib.rs');
+let engine;
 
-const engine = new Enigma();
-
-class JSEngine extends EventEmitter {
+class RustEngine extends EventEmitter {
     constructor() {
         super();
         this.config = {
             reflector: 'B',
             rotors: [
-                {type: 'I', ring: 0, position: 'A'},
-                {type: 'II', ring: 1, position: 'A'},
-                {type: 'III', ring: 2, position: 'A'}
+                {rtype: 'I', ring: 0, position: 'A'},
+                {rtype: 'II', ring: 1, position: 'A'},
+                {rtype: 'III', ring: 2, position: 'A'}
             ],
             plugboard: []
         };
 
-        engine.configure(this.config);
+        engimaLoader.then(m => {
+            engine = m;
+        });
 
         this.originalMessage = '';
         this.encryptedMessage = '';
     }
 
+    get loaded() {
+        return !!engine;
+    }
+
     setRotor(ring, type, position) {
         this.config.rotors.forEach(rotor => {
             if (rotor.ring === ring) {
-                rotor.type = type;
+                rotor.rtype = type;
                 rotor.position = position;
             }
         });
@@ -54,7 +59,7 @@ class JSEngine extends EventEmitter {
 
     _configureImpl() {
         console.log('New config: ', this.config);
-        engine.configure(this.config);
+
         this.originalMessage = '';
         this.encryptedMessage = '';
         this.emit(this.messageProcessedEvent, '');
@@ -63,10 +68,11 @@ class JSEngine extends EventEmitter {
     sendMessage(message) {
         return new Promise((resolve, reject) => {
             try {
-                let retVal = engine.processMessage(message);
+                let rmessage = this.originalMessage + message;
+                let retVal = engine.process_message(String(rmessage), JSON.stringify(this.config));
 
                 this.originalMessage += message;
-                this.encryptedMessage += retVal;
+                this.encryptedMessage = retVal;
 
                 this.emit(this.messageProcessedEvent, retVal);
                 resolve(retVal);
@@ -84,13 +90,9 @@ class JSEngine extends EventEmitter {
         return 'loaded';
     }
 
-    get loaded() {
-        return true;
-    }
-
     getRotor(ring) {
-        return engine.rotors[ring];
+        return this.config.rotors[ring];
     }
 }
 
-export default new JSEngine();
+export default new RustEngine();
