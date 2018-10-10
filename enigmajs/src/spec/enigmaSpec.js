@@ -139,7 +139,7 @@ describe('Enigma', () => {
                 });
 
                 it('Should encrypt the message', () => {
-                    expect(out).toBe('IZVEBXPZOO');
+                    expect(out).toBe('IJWDAANCNS');
                 });
 
                 describe('When attempting to decypt the message', () => {

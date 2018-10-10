@@ -2,6 +2,8 @@ import { EventEmitter } from 'events';
 const engimaLoader = import('../../../../enigmarust/enigmawasm/src/lib.rs');
 let engine;
 
+const CODE_OFFSET = 65;
+
 class RustEngine extends EventEmitter {
     constructor() {
         super();
@@ -68,11 +70,11 @@ class RustEngine extends EventEmitter {
     sendMessage(message) {
         return new Promise((resolve, reject) => {
             try {
-                let rmessage = this.originalMessage + message;
-                let retVal = engine.process_message(String(rmessage), JSON.stringify(this.config));
+                let retVal = engine.process_message(String(message), JSON.stringify(this.config));
 
                 this.originalMessage += message;
-                this.encryptedMessage = retVal;
+                this.encryptedMessage += retVal;
+                this._updateRotorPositions(message.length);
 
                 this.emit(this.messageProcessedEvent, retVal);
                 resolve(retVal);
@@ -80,6 +82,31 @@ class RustEngine extends EventEmitter {
                 reject(err);
             }
         });
+    }
+
+    _updateRotorPositions(offset) {
+        for (let i = 0; i < offset; i++) {
+            if (this.config.rotors[0].position !== 'Z') {
+                let pos = this.config.rotors[0].position.charCodeAt(0) - CODE_OFFSET;
+                this.config.rotors[0].position = String.fromCharCode(CODE_OFFSET + ++pos);
+                continue;
+            }
+
+            this.config.rotors[0].position = 'A';
+
+            if (this.config.rotors[1].position !== 'Z') {
+                let pos = this.config.rotors[1].position.charCodeAt(0) - CODE_OFFSET;
+                this.config.rotors[1].position = String.fromCharCode(CODE_OFFSET + ++pos);
+                continue;
+            }
+
+            this.config.rotors[1].position = 'A';
+
+            if (this.config.rotors[2].position !== 'Z') {
+                let pos = this.config.rotors[2].position.charCodeAt(0) - CODE_OFFSET;
+                this.config.rotors[2].position = String.fromCharCode(CODE_OFFSET + ++pos);
+            }
+        }
     }
 
     get messageProcessedEvent() {

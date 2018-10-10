@@ -91,9 +91,9 @@ export class Enigma {
 
         letter = this._reflect(letter);
 
-        this.rotors.reverse().forEach((rotor) => {
-            letter = rotor.unshift(letter);
-        });
+        for (let i = this.rotors.length; i > 0; i--) {
+            letter = this.rotors[i - 1].unshift(letter);
+        }
 
         letter = this.plugboard.shift(letter);
 
