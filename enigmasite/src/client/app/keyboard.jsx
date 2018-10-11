@@ -35,17 +35,17 @@ export class Keyboard extends React.Component {
             <div className="lamp" onKeyPress={this.keyPressed.bind(this)}>
                 <div className="row">
                     {alphabetRow1.map(letter => 
-                        <button onClick={() => this.boundPressed(letter)}>{letter}</button>
+                        <button onClick={() => this.boundPressed(letter)} key={letter}>{letter}</button>
                     )}
                 </div>
                 <div className="row">
                     {alphabetRow2.map(letter => 
-                        <button onClick={() => this.boundPressed(letter)}>{letter}</button>
+                        <button onClick={() => this.boundPressed(letter)} key={letter}>{letter}</button>
                     )}
                 </div>
                 <div className="row">
                     {alphabetRow3.map(letter => 
-                        <button onClick={() => this.boundPressed(letter)}>{letter}</button>
+                        <button onClick={() => this.boundPressed(letter)} key={letter}>{letter}</button>
                     )}
                 </div>
             </div>

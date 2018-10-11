@@ -5,6 +5,8 @@ const validInput = /[A-Z]/;
 export class PlugManager extends EventEmitter {
     constructor() {
         super();
+
+        this.setMaxListeners(0);
         this.plugs = new Map();
     }
 

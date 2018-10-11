@@ -10,13 +10,14 @@ export class Plug extends React.Component {
             edit: false
         };
 
-        this.boundEdit = this.toggleEdit.bind(this);
-        this.boundChange = this.handleChange.bind(this);
-        this.boundPress = this.handlePress.bind(this);
-        this.props.manager.on(this.props.manager.plugsChanged, this.onPlugsChanged.bind(this));
+        this.boundEdit = this._toggleEdit.bind(this);
+        this.boundChange = this._handleChange.bind(this);
+        this.boundPress = this._handlePress.bind(this);
+        this.boundPlugsChanged = this._onPlugsChanged.bind(this);
+        this.props.manager.on(this.props.manager.plugsChanged, this.boundPlugsChanged);
     }
 
-    onPlugsChanged(changeEvent) {
+    _onPlugsChanged(changeEvent) {
         let newLetter;
 
         if (this.props.letter === changeEvent.key) {
@@ -33,13 +34,13 @@ export class Plug extends React.Component {
         });
     }
 
-    toggleEdit() {
+    _toggleEdit() {
         this.setState({
             edit: !this.state.edit
         });
     }
 
-    handleChange(event) {
+    _handleChange(event) {
         let letter = event.target.value.toUpperCase();
 
         if (this.props.manager.validatePlug(this.props.letter, letter)) {
@@ -52,24 +53,24 @@ export class Plug extends React.Component {
         });
     }
 
-    handlePress(event) {
+    _handlePress(event) {
         if (event.charCode !== 13 && event.key !== 'Enter') {
             return;
         }
 
-        this.toggleEdit();
+        this._toggleEdit();
     }
 
     render() {
         return (
             <div className="plug">
                 <div className="plug-key">{this.props.letter}</div>
-                {this.renderValue()}
+                {this._renderValue()}
             </div>
         )
     }
 
-    renderValue() {
+    _renderValue() {
         if (this.state.edit) {
             return <input type="text"
                           defaultValue={this.state.mappedLetter}
@@ -86,5 +87,9 @@ export class Plug extends React.Component {
         }
 
         return <button className="min-plug-size" onClick={this.boundEdit}><i className="fa fa-circle-o"></i></button>
+    }
+
+    componentWillUnmount() {
+        this.props.manager.off(this.props.manager.plugsChanged, this.boundPlugsChanged);
     }
 }

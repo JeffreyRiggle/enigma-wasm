@@ -10,8 +10,8 @@ export class App extends React.Component {
     render () {
         return (
             <nav className="navbar">
-                <NavLink to="/js" className="nav-item" activeClassName="active" onlyActiveOnIndex>Javascript Engine</NavLink>
-                <NavLink to="/rust" className="nav-item" activeClassName="active" onlyActiveOnIndex>Rust Engine</NavLink>
+                <NavLink to="/js" className="nav-item" activeClassName="active">Javascript Engine</NavLink>
+                <NavLink to="/rust" className="nav-item" activeClassName="active">Rust Engine</NavLink>
             </nav>
         );
     }

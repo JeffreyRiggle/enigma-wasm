@@ -22,17 +22,17 @@ export class Lamp extends React.Component {
             <div className="lamp">
                 <div className="row">
                     {alphabetRow1.map(letter => 
-                        <span className={letter === this.state.selected ? 'selected' : ''}>{letter}</span>
+                        <span className={letter === this.state.selected ? 'selected' : ''} key={letter}>{letter}</span>
                     )}
                 </div>
                 <div className="row">
                     {alphabetRow2.map(letter => 
-                        <span className={letter === this.state.selected ? 'selected' : ''}>{letter}</span>
+                        <span className={letter === this.state.selected ? 'selected' : ''} key={letter}>{letter}</span>
                     )}
                 </div>
                 <div className="row">
                     {alphabetRow3.map(letter => 
-                        <span className={letter === this.state.selected ? 'selected' : ''}>{letter}</span>
+                        <span className={letter === this.state.selected ? 'selected' : ''} key={letter}>{letter}</span>
                     )}
                 </div>
             </div>

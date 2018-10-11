@@ -22,17 +22,17 @@ export class Plugboard extends React.Component {
             <div className="plugboard">
                 <div className="plug-row">
                     {alphabetRow1.map(letter => 
-                        <Plug letter={letter} manager={this.manager}/>
+                        <Plug letter={letter} manager={this.manager} key={letter}/>
                     )}
                 </div>
                 <div className="plug-row">
                     {alphabetRow2.map(letter => 
-                        <Plug letter={letter} manager={this.manager}/>
+                        <Plug letter={letter} manager={this.manager} key={letter}/>
                     )}
                 </div>
                 <div className="plug-row">
                     {alphabetRow3.map(letter => 
-                        <Plug letter={letter} manager={this.manager}/>
+                        <Plug letter={letter} manager={this.manager} key={letter}/>
                     )}
                 </div>                
             </div>
