@@ -22,7 +22,6 @@ export class EnigmaRust extends React.Component {
     render () {
         return (
             <div>
-                <h1>Rust Enigma</h1>
                 <EnigmaView engine={rustEngine}/>
                 <div className="result-container">
                     <div className="result-area">

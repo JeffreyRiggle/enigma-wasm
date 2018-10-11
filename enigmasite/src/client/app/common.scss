@@ -3,6 +3,7 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts";
 @import "../../../node_modules/font-awesome/scss/font-awesome";
 
 $default-border-size: 1px;
+$active-nav-color: rgb(189, 50, 189);
 $default-border: $default-border-size solid black;
 $default-padding: 4px;
 $large-padding: 8px;
@@ -25,6 +26,27 @@ $large-padding: 8px;
         .output {
             height: 300px;
             cursor: default;
+        }
+    }
+}
+
+.navbar {
+    background-color: black;
+    color: white;
+    padding: $large-padding;
+    margin-bottom: $large-padding;
+
+    .nav-item {
+        color: white;
+        text-decoration: none;
+        padding: $default-padding $large-padding;
+
+        &:hover {
+            color: $active-nav-color
+        }
+
+        &.active {
+            border-bottom: 4px solid $active-nav-color
         }
     }
 }
