@@ -23,6 +23,7 @@ export class EnigmaRust extends React.Component {
         return (
             <div>
                 <EnigmaView engine={rustEngine}/>
+                <label>Last Execution Took: {rustEngine.timeTaken}</label>
                 <div className="result-container">
                     <div className="result-area">
                         <label>Input</label>

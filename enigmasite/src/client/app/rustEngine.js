@@ -70,10 +70,13 @@ class RustEngine extends EventEmitter {
     sendMessage(message) {
         return new Promise((resolve, reject) => {
             try {
+                var start = performance.now()
                 let retVal = engine.process_message(String(message), JSON.stringify(this.config));
 
                 this.originalMessage += message;
                 this.encryptedMessage += retVal;
+                this._timeTaken = performance.now() - start;
+                
                 this._updateRotorPositions(message.length);
 
                 this.emit(this.messageProcessedEvent, retVal);
@@ -119,6 +122,10 @@ class RustEngine extends EventEmitter {
 
     getRotor(ring) {
         return this.config.rotors[ring];
+    }
+
+    get timeTaken() {
+        return this._timeTaken;
     }
 }
 

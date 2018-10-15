@@ -63,10 +63,12 @@ class JSEngine extends EventEmitter {
     sendMessage(message) {
         return new Promise((resolve, reject) => {
             try {
+                var start = performance.now();
                 let retVal = engine.processMessage(message);
 
                 this.originalMessage += message;
                 this.encryptedMessage += retVal;
+                this._timeTaken = performance.now() - start;
 
                 this.emit(this.messageProcessedEvent, retVal);
                 resolve(retVal);
@@ -90,6 +92,10 @@ class JSEngine extends EventEmitter {
 
     getRotor(ring) {
         return engine.rotors[ring];
+    }
+
+    get timeTaken() {
+        return this._timeTaken;
     }
 }
 

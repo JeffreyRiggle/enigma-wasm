@@ -22,6 +22,7 @@ export class EnigmaJS extends React.Component {
         return (
             <div>
                 <EnigmaView engine={jsEngine}/>
+                <label>Last Execution Took: {jsEngine.timeTaken}</label>
                 <div className="result-container">
                     <div className="result-area">
                         <label>Input</label>

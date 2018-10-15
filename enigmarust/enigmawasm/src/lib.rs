@@ -29,6 +29,5 @@ pub fn do_log(s: &str) {
 
 #[wasm_bindgen]
 pub fn process_message(initial: String, config: String) -> String {
-    log("Entered Rust WASM");
     Enigma::new(config.clone()).process_message(initial.clone()).clone()
 }
