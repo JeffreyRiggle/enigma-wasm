@@ -35,7 +35,7 @@ impl Rotor {
         let poffset: i32 = (self.position as i32) - 65;
         let offset: i32 = self.rotor_map.iter().position(|&c| c == letter).unwrap() as i32;
 
-        let mut code = poffset - offset;
+        let mut code = offset - poffset;
 
         if code < 0 {
             code = 26 + code;

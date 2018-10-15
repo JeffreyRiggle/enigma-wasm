@@ -33,19 +33,19 @@ impl Enigma {
             let mut processed_letter = letter;
 
             processed_letter = self.plugboard.shift(processed_letter);
-
+ 
             for rotor in self.rotors.iter() {
                 processed_letter = rotor.shift(processed_letter);
             }
 
             processed_letter = self.reflect(processed_letter);
-
+ 
             for rotor in self.rotors.iter().rev() {
                 processed_letter = rotor.unshift(processed_letter);
             }
 
             processed_letter = self.plugboard.shift(processed_letter);
-
+ 
             self.move_rotors();
 
             ret_val.push(processed_letter);

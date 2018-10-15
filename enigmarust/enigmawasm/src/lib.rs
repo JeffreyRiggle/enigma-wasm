@@ -18,6 +18,17 @@ mod rotor;
 mod config;
 
 #[wasm_bindgen]
+extern "C" {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: &str);
+}
+
+pub fn do_log(s: &str) {
+    log(s);
+}
+
+#[wasm_bindgen]
 pub fn process_message(initial: String, config: String) -> String {
+    log("Entered Rust WASM");
     Enigma::new(config.clone()).process_message(initial.clone()).clone()
 }
