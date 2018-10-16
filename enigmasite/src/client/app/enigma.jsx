@@ -28,7 +28,7 @@ export class EnigmaView extends React.Component {
                 </div>
                     <Lamp engine={this.props.engine}/>
                 <div>
-                    <Keyboard engine={this.props.engine}/>
+                    <Keyboard engine={this.props.engine} disabled={this.props.disableKeyboard}/>
                 </div>
                 <div>
                     <Plugboard engine={this.props.engine}/>
