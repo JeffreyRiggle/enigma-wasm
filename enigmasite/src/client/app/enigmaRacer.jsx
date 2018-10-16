@@ -24,9 +24,21 @@ export class EnigmaRacer extends React.Component {
     }
 
     inputChanged(event) {
+        let message = this._santizeMessage(event.target.value);
+        const valid = this._checkValid(message);
+
         this.setState({
-            message: event.target.value
+            message: message,
+            valid: valid
         });
+    }
+
+    _santizeMessage(message) {
+        return message.toUpperCase().replace(/ /g, '');
+    }
+
+    _checkValid(message) {
+        return /^[A-Z]+$/.test(message);
     }
 
     render() {
@@ -34,17 +46,23 @@ export class EnigmaRacer extends React.Component {
             <div>
                 <EnigmaView engine={racerEngine} disableKeyboard={true}/>
                 <div>
-                    <div>
-                        <textarea value={this.state.message} onChange={this.inputChanged.bind(this)}/>
-                        <button onClick={() => { this.send() }}>Send</button>
+                    <div className="input-container">
+                        <textarea 
+                            value={this.state.message} 
+                            onChange={this.inputChanged.bind(this)} 
+                            defaultValue="Type Message here..."
+                            className={"input-area " + (this.state.valid ? '' : 'error')}/>
+                        <button onClick={() => { this.send() }} 
+                                className="send-input"
+                                disabled={!this.state.valid}>Send</button>
                     </div>
-                    <div>
-                        <div>
+                    <div className="result-container">
+                        <div className="result-area">
                             <label>Javascript Engine</label>
                             <label>Last Execution Took: {racerEngine.timeTakenJS}</label>
                             <textarea value={this.state.encryptedMessageJS} readOnly={true} className="output"/>
                         </div>
-                        <div>
+                        <div className="result-area">
                             <label>Rust Engine</label>
                             <label>Last Execution Took: {racerEngine.timeTakenRust}</label>
                             <textarea value={this.state.encryptedMessageRS} readOnly={true} className="output"/>

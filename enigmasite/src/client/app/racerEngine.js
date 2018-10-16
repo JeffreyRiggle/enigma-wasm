@@ -41,17 +41,24 @@ class RacerEngine extends EventEmitter {
     }
 
     sendMessage(message) {
+        let smessage = this._sanitizeMessage(message);
+
         return new Promise((resolve, reject) => {
-            var jsPromise = jsEngine.sendMessage(message);
-            var rsPromise = rustEngine.sendMessage(message);
+            var jsPromise = jsEngine.sendMessage(smessage);
+            var rsPromise = rustEngine.sendMessage(smessage);
 
             Promise.all([jsPromise, rsPromise]).then(() => {
                 this.emit(this.messageProcessedEvent, this.encryptedMessageJS, this.encryptedMessageRS);
-                resolve(retVal);
+                resolve({js: this.encryptedMessageJS, rs: this.encryptedMessageRS});
             }).catch((err) => {
+                this.emit(this.messageProcessedEvent, this.encryptedMessageJS, this.encryptedMessageRS);
                 reject(err);
             });
         });
+    }
+
+    _sanitizeMessage(message) {
+        return message.toUpperCase().replace(/ /g, '');
     }
 
     get messageProcessedEvent() {

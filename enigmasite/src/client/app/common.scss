@@ -30,6 +30,21 @@ $large-padding: 8px;
     }
 }
 
+.input-container {
+    margin-top: $large-padding;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row;
+
+    .input-area {
+        flex: 1 1 auto;
+    }
+
+    .send-input {
+        flex: 0 1 auto;
+    }
+}
+
 .navbar {
     background-color: black;
     color: white;
