@@ -90,6 +90,6 @@ export class Plug extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.manager.off(this.props.manager.plugsChanged, this.boundPlugsChanged);
+        this.props.manager.removeListener(this.props.manager.plugsChanged, this.boundPlugsChanged);
     }
 }

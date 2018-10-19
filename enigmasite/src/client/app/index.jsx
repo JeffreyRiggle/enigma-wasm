@@ -5,6 +5,7 @@ import {BrowserRouter, NavLink, Route} from 'react-router-dom';
 import {EnigmaJS} from './enigmaJS.jsx';
 import {EnigmaRust} from './enigmaRust.jsx';
 import {EnigmaRacer} from './enigmaRacer.jsx';
+import {BombeView} from './bombeView.jsx';
 
 import './common.scss';
 
@@ -15,6 +16,7 @@ export class App extends React.Component {
                 <NavLink to="/js" className="nav-item" activeClassName="active">Javascript Engine</NavLink>
                 <NavLink to="/rust" className="nav-item" activeClassName="active">Rust Engine</NavLink>
                 <NavLink to="/racer" className="nav-item" activeClassName="active">Racer Engine</NavLink>
+                <NavLink to="/bombe" className="nav-item" activeClassName="active">Bombe Engine</NavLink>
             </nav>
         );
     }
@@ -27,6 +29,7 @@ render((
             <Route path="/js" component={EnigmaJS}/>
             <Route path="/rust" component={EnigmaRust}/>
             <Route path="/racer" component={EnigmaRacer}/>
+            <Route path="/bombe" component={BombeView}/>
         </div>
     </BrowserRouter>
 ), document.getElementById('app'));

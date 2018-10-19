@@ -40,6 +40,6 @@ export class Lamp extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.engine.off(this.props.engine.messageProcessedEvent, this.boundChangeLamp);
+        this.props.engine.removeListener(this.props.engine.messageProcessedEvent, this.boundChangeLamp);
     }
 }
