@@ -12,28 +12,28 @@ export class Bombe {
     }
 
     get expectation() {
-        return _expectation;
+        return this._expectation;
     }
 
     crackCode(message) {
-        let config = this._getNextConfig();
-        let tasks = [];
+        return new Promise((resolve, reject) => {
+            let config = this._getNextConfig();
+            
+            while (config) {
+                try {
+                    let result = this._testConfig(config, message);
+                    if (result.config) {
+                        resolve(result);
+                        return;
+                    }
+                } catch (error) {
 
-        while (config) {
-            tasks.push(this._testConfig(config, message));
-            config = this._getNextConfig();
-        }
+                }
+                config = this._getNextConfig();
+            }
 
-        let retVal;
-
-        //TODO fix this.
-        Promise.all(tasks).then(results => {
-
-        }).catch(err => {
-
+            reject('No valid config found.');
         });
-
-        return retVal;
     }
 
     _getNextConfig() {
@@ -51,7 +51,7 @@ export class Bombe {
             return this._lastAttemptedConfig;
         }
 
-        let retVal = {};
+        let retVal = this._lastAttemptedConfig;
         if (this._isLastRotorPosition(this._lastAttemptedConfig)) {
             if (!this._getNextPlug(retVal)) {
                 return false;
@@ -66,7 +66,6 @@ export class Bombe {
     }
 
     _getNextPlug(config) {
-        // TODO figure this out its a bit of a nightmare
         if (config.plugboard.length === 0) {
             config.plugboard = ['AB'];
             return;
@@ -76,6 +75,59 @@ export class Bombe {
             return false;
         }
 
+        if (config.plugboard.length === 1 && config.plugboard[0] === 'AZ') {
+            config.plugboard = ['AC', 'BD'];
+            return;
+        }
+        if (config.plugboard.length === 2 && config.plugboard[1] === 'BZ') {
+            config.plugboard = ['AD', 'BE', 'CF'];
+            return;
+        }
+        if (config.plugboard.length === 3 && config.plugboard[2] === 'CZ') {
+            config.plugboard = ['AE', 'BF', 'CG', 'DH'];
+            return;
+        }
+        if (config.plugboard.length === 4 && config.plugboard[3] === 'DZ') {
+            config.plugboard = ['AF', 'BG', 'CH', 'DI', 'EJ'];
+            return;
+        }
+        if (config.plugboard.length === 5 && config.plugboard[4] === 'EZ') {
+            config.plugboard = ['AG', 'BH', 'CI', 'DJ', 'EK', 'FL'];
+            return;
+        }
+        if (config.plugboard.length === 6 && config.plugboard[5] === 'FZ') {
+            config.plugboard = ['AH', 'BI', 'CJ', 'DK', 'EL', 'FM', 'GN'];
+            return;
+        }
+        if (config.plugboard.length === 7 && config.plugboard[6] === 'GZ') {
+            config.plugboard = ['AI', 'BJ', 'CK', 'DL', 'EM', 'FN', 'GO', 'HP'];
+            return;
+        }
+        if (config.plugboard.length === 8 && config.plugboard[7] === 'HZ') {
+            config.plugboard = ['AJ', 'BK', 'CL', 'DM', 'EN', 'FO', 'GP', 'HQ', 'IR'];
+            return;
+        }
+        if (config.plugboard.length === 9 && config.plugboard[8] === 'IZ') {
+            config.plugboard = ['AK', 'BL', 'CM', 'DN', 'EO', 'FP', 'GQ', 'HR', 'IS', 'JT'];
+            return;
+        }
+        if (config.plugboard.length === 10 && config.plugboard[9] === 'JZ') {
+            config.plugboard = ['AL', 'BM', 'CN', 'DO', 'EP', 'FQ', 'GR', 'HS', 'IT', 'JU', 'KV'];
+            return;
+        }
+        if (config.plugboard.length === 11 && config.plugboard[10] === 'KZ') {
+            config.plugboard = ['AM', 'BN', 'CO', 'DP', 'EQ', 'FR', 'GS', 'HT', 'IU', 'JV', 'KW', 'LX'];
+            return;
+        }
+        if (config.plugboard.length === 12 && config.plugboard[11] === 'LZ') {
+            config.plugboard = ['AN', 'BO', 'CP', 'DQ', 'ER', 'FS', 'GT', 'HU', 'IV', 'JW', 'KX', 'LY', 'MZ'];
+            return;
+        }
+
+        this._movePlugs(config); 
+    }
+
+    _movePlugs(config) {
         for (let i = config.plugboard.length - 1; i > 0; i--) {
             let plug = config.plugboard[i][1];
             if (plug === 'Z') {
@@ -89,14 +141,13 @@ export class Bombe {
                 nplug = String.fromCharCode(CODE_OFFSET + ++pos);
             }
 
-
             config.plugboard[i] = config.plugboard[i][0] + nplug;
             break;
         }
     }
 
     _isLastRotorPosition(config) {
-        return config.rotors[0].position === 'Z' && config.rotors[1].position === 'Z' && config.rotors[2].position === 'Z'
+        return config.rotors[0].position === 'Z' && config.rotors[1].position === 'Z' && config.rotors[2].position === 'Z';
     }
 
     _getNextRotorPosition(config) {
@@ -115,7 +166,7 @@ export class Bombe {
 
         config.rotors[0].position = 'A';
 
-        if (config.rotors[1] !== 'Z') {
+        if (config.rotors[1].position !== 'Z') {
             let pos = config.rotors[1].position.charCodeAt(0) - CODE_OFFSET;
             config.rotors[1].position = String.fromCharCode(CODE_OFFSET + ++pos);
             return;
@@ -123,7 +174,7 @@ export class Bombe {
 
         config.rotors[1].position = 'A';
 
-        if (config.rotors[2] !== 'Z') {
+        if (config.rotors[2].position !== 'Z') {
             let pos = config.rotors[2].position.charCodeAt(0) - CODE_OFFSET;
             config.rotors[2].position = String.fromCharCode(CODE_OFFSET + ++pos);
             return;
@@ -131,17 +182,14 @@ export class Bombe {
     }
 
     _testConfig(config, message) {
-        return new Promise((resolve, reject) => {
-            let machine = new Enigma();
-            machine.configure(config);
+        let machine = new Enigma();
+        machine.configure(config);
     
-            let result = machine.processMessage(message);
-            if (this.expectation.test(result)) {
-                reject('Invalid configuration');
-                return;
-            }
+        let result = machine.processMessage(message);
+        if (!this.expectation.test(result)) {
+            return;
+        }
 
-            resolve({config: config, result: result});
-        });
+        return {config: config, result: result};
     }
 }

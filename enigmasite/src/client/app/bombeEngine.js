@@ -13,13 +13,19 @@ class BombeEngine extends EventEmitter {
     }
 
     sendMessage(message, expectation) {
-        bombe.expectation = expectation;
-        bombe.crackCode(message).then(result => {
-            this.emit(this.codeFoundEvent, {
-                result: result.result,
-                config: JSON.stringify(result.config)
+        setTimeout(() => {
+            bombe.expectation = new RegExp(expectation);
+            let start = performance.now();
+            this._running = true;
+            bombe.crackCode(message).then(result => {
+                this._timeTaken = performance.now() - start;
+                this._running = false;
+                this.emit(this.codeFoundEvent, {
+                    result: result.result,
+                    config: JSON.stringify(result.config)
+                });
             });
-        });
+        });   
     }
 
     _sanitizeMessage(message) {
@@ -34,12 +40,16 @@ class BombeEngine extends EventEmitter {
         return 'loaded';
     }
 
+    get running() {
+        return this._running;
+    }
+
     getRotor(ring) {
         return jsEngine.getRotor(ring);
     }
 
     get timeTaken() {
-        return 1;
+        return this._timeTaken;
     }
 }
 
