@@ -1,5 +1,7 @@
 import React from 'react';
 import bombeEngine from './bombeEngine';
+import waitingImage from '../../../static/waiting.gif';
+import './bombe.scss';
 
 export class BombeView extends React.Component {
     constructor(props) {
@@ -14,12 +16,18 @@ export class BombeView extends React.Component {
     codeFound(result) {
         this.setState({
             originalMessage: result.result,
-            config: result.config
+            config: result.config,
+            running: false
         });
     }
 
     send() {
         bombeEngine.sendMessage(this.state.message, this.state.expectation);
+        this.setState({
+            originalMessage: '',
+            config: '',
+            running: true
+        });
     }
 
     inputChanged(event) {
@@ -50,24 +58,39 @@ export class BombeView extends React.Component {
         return (
             <div>
                 <div>
-                    <div className="input-container">
-                        <textarea 
-                            value={this.state.message} 
-                            onChange={this.inputChanged.bind(this)} 
-                            defaultValue="Encrypted Message here..."
-                            className={"input-area " + (this.state.valid ? '' : 'error')}/>
-                        <button onClick={() => { this.send() }} 
-                                className="send-input"
-                                disabled={!this.state.valid}>Send</button>
-                        <label>Expectation</label>
-                        <textarea value={this.state.expectation} onChange={this.expectationChanged.bind(this)} />
+                    <div className="input-area">
+                        <div className="input-child">
+                            <textarea 
+                                value={this.state.message} 
+                                onChange={this.inputChanged.bind(this)} 
+                                defaultValue="Encrypted Message here..."
+                                className={"input-area " + (this.state.valid ? '' : 'error')}/>
+                        </div>
+                        <div className="input-child expectation">
+                            <label>Expectation</label>
+                            <div className="input-child">
+                                <textarea value={this.state.expectation} onChange={this.expectationChanged.bind(this)} />
+                                <button onClick={() => { this.send() }} 
+                                        className="send-input"
+                                        disabled={!this.state.valid}>Send</button>
+                            </div>
+                        </div>
                     </div>
+                    {this.state.running && <img src={waitingImage} />}
                     <div className="result-container">
                         <div className="result-area">
                             <label>Javascript Engine</label>
                             <label>Last Execution Took: {bombeEngine.timeTaken}</label>
-                            <textarea value={this.state.originalMessage} readOnly={true} className="output"/>
-                            <textarea value={this.state.config} readOnly={true} className="output"/>
+                            <div className="result-details">
+                                <div className="result-detail-area">
+                                    <label>Decoded Message</label>
+                                    <textarea value={this.state.originalMessage} readOnly={true} className="output"/>
+                                </div>
+                                <div className="result-detail-area">
+                                    <label>Found Configuration</label>
+                                    <textarea value={this.state.config} readOnly={true} className="output"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

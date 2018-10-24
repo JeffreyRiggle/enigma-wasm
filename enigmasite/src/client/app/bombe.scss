@@ -1,0 +1,36 @@
+@import 'common';
+
+.input-area {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+
+    .input-child {
+        display: flex;
+        flex: 1 1 auto;
+
+        &.expectation {
+            flex-direction: column;
+            display: flex;
+            flex: 1 1 auto;
+        }
+
+        &+.input-child {
+            margin-top: $large-padding;
+        }
+    }
+}
+.result-container .result-area {
+    .result-details {
+        display: flex;
+        flex-direction: row;
+        flex: 1 1 auto;
+        margin-top: $large-padding;
+
+        .result-detail-area {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+        }
+    }
+}
