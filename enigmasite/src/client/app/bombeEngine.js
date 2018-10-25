@@ -24,6 +24,8 @@ class BombeEngine extends EventEmitter {
                     result: result.result,
                     config: JSON.stringify(result.config)
                 });
+            }).catch(error => {
+                console.log(error);
             });
         });   
     }

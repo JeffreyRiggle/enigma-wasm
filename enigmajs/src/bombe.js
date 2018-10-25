@@ -68,7 +68,7 @@ export class Bombe {
     _getNextPlug(config) {
         if (config.plugboard.length === 0) {
             config.plugboard = ['AB'];
-            return;
+            return true;
         }
         
         if (config.plugboard.length === 13 && config.plugboard[12] === 'ZX') {
@@ -77,54 +77,55 @@ export class Bombe {
 
         if (config.plugboard.length === 1 && config.plugboard[0] === 'AZ') {
             config.plugboard = ['AC', 'BD'];
-            return;
+            return true;
         }
         if (config.plugboard.length === 2 && config.plugboard[1] === 'BZ') {
             config.plugboard = ['AD', 'BE', 'CF'];
-            return;
+            return true;
         }
         if (config.plugboard.length === 3 && config.plugboard[2] === 'CZ') {
             config.plugboard = ['AE', 'BF', 'CG', 'DH'];
-            return;
+            return true;
         }
         if (config.plugboard.length === 4 && config.plugboard[3] === 'DZ') {
             config.plugboard = ['AF', 'BG', 'CH', 'DI', 'EJ'];
-            return;
+            return true;
         }
         if (config.plugboard.length === 5 && config.plugboard[4] === 'EZ') {
             config.plugboard = ['AG', 'BH', 'CI', 'DJ', 'EK', 'FL'];
-            return;
+            return true;
         }
         if (config.plugboard.length === 6 && config.plugboard[5] === 'FZ') {
             config.plugboard = ['AH', 'BI', 'CJ', 'DK', 'EL', 'FM', 'GN'];
-            return;
+            return true;
         }
         if (config.plugboard.length === 7 && config.plugboard[6] === 'GZ') {
             config.plugboard = ['AI', 'BJ', 'CK', 'DL', 'EM', 'FN', 'GO', 'HP'];
-            return;
+            return true;
         }
         if (config.plugboard.length === 8 && config.plugboard[7] === 'HZ') {
             config.plugboard = ['AJ', 'BK', 'CL', 'DM', 'EN', 'FO', 'GP', 'HQ', 'IR'];
-            return;
+            return true;
         }
         if (config.plugboard.length === 9 && config.plugboard[8] === 'IZ') {
             config.plugboard = ['AK', 'BL', 'CM', 'DN', 'EO', 'FP', 'GQ', 'HR', 'IS', 'JT'];
-            return;
+            return true;
         }
         if (config.plugboard.length === 10 && config.plugboard[9] === 'JZ') {
             config.plugboard = ['AL', 'BM', 'CN', 'DO', 'EP', 'FQ', 'GR', 'HS', 'IT', 'JU', 'KV'];
-            return;
+            return true;
         }
         if (config.plugboard.length === 11 && config.plugboard[10] === 'KZ') {
             config.plugboard = ['AM', 'BN', 'CO', 'DP', 'EQ', 'FR', 'GS', 'HT', 'IU', 'JV', 'KW', 'LX'];
-            return;
+            return true;
         }
         if (config.plugboard.length === 12 && config.plugboard[11] === 'LZ') {
             config.plugboard = ['AN', 'BO', 'CP', 'DQ', 'ER', 'FS', 'GT', 'HU', 'IV', 'JW', 'KX', 'LY', 'MZ'];
-            return;
+            return true;
         }
 
-        this._movePlugs(config); 
+        this._movePlugs(config);
+        return true;
     }
 
     _movePlugs(config) {
@@ -182,11 +183,15 @@ export class Bombe {
     }
 
     _testConfig(config, message) {
-        let machine = new Enigma();
-        machine.configure(config);
-    
-        let result = machine.processMessage(message);
-        if (!this.expectation.test(result)) {
+        try {
+            let machine = new Enigma();
+            machine.configure(config);
+        
+            let result = machine.processMessage(message);
+            if (!this.expectation.test(result)) {
+                return;
+            }
+        } catch (error) {
             return;
         }
 

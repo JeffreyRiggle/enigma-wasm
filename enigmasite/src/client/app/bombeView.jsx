@@ -69,7 +69,9 @@ export class BombeView extends React.Component {
                         <div className="input-child expectation">
                             <label>Expectation</label>
                             <div className="input-child">
-                                <textarea value={this.state.expectation} onChange={this.expectationChanged.bind(this)} />
+                                <textarea className="input-area" 
+                                        value={this.state.expectation} 
+                                        onChange={this.expectationChanged.bind(this)} />
                                 <button onClick={() => { this.send() }} 
                                         className="send-input"
                                         disabled={!this.state.valid}>Send</button>
