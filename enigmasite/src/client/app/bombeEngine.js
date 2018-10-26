@@ -1,7 +1,6 @@
 import { EventEmitter } from 'events';
-import { Bombe } from "../../../../enigmajs/src/bombe";
-
-const bombe = new Bombe();
+import BombeWorker from 'worker-loader?name=hash.worker.js!./bombeWorker.js';
+const bombeWorker = new BombeWorker;
 
 class BombeEngine extends EventEmitter {
     constructor() {
@@ -13,21 +12,18 @@ class BombeEngine extends EventEmitter {
     }
 
     sendMessage(message, expectation) {
-        setTimeout(() => {
-            bombe.expectation = new RegExp(expectation);
-            let start = performance.now();
-            this._running = true;
-            bombe.crackCode(message).then(result => {
+        let start = performance.now();
+        bombeWorker.postMessage({expectation: expectation, message: message});
+        bombeWorker.onmessage = (event) => {
+            if (event.config) {
                 this._timeTaken = performance.now() - start;
                 this._running = false;
                 this.emit(this.codeFoundEvent, {
                     result: result.result,
                     config: JSON.stringify(result.config)
                 });
-            }).catch(error => {
-                console.log(error);
-            });
-        });   
+            }
+        } 
     }
 
     _sanitizeMessage(message) {
