@@ -15,12 +15,12 @@ class BombeEngine extends EventEmitter {
         let start = performance.now();
         bombeWorker.postMessage({expectation: expectation, message: message});
         bombeWorker.onmessage = (event) => {
-            if (event.config) {
+            if (event.data.config) {
                 this._timeTaken = performance.now() - start;
                 this._running = false;
                 this.emit(this.codeFoundEvent, {
-                    result: result.result,
-                    config: JSON.stringify(result.config)
+                    result: event.data.result,
+                    config: JSON.stringify(event.data.config)
                 });
             }
         } 

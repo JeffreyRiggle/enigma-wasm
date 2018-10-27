@@ -18,21 +18,23 @@ export class Bombe {
     crackCode(message) {
         return new Promise((resolve, reject) => {
             let config = this._getNextConfig();
+            let retVal;
             
             while (config) {
-                try {
-                    let result = this._testConfig(config, message);
-                    if (result.config) {
-                        resolve(result);
-                        return;
-                    }
-                } catch (error) {
-
+                let result = this._testConfig(config, message);
+                if (result && result.config) {
+                    retVal = result;
+                    break;
                 }
                 config = this._getNextConfig();
             }
 
-            reject('No valid config found.');
+            if (retVal) {
+                resolve(retVal);
+            }
+            else {
+                reject('No valid config found.');
+            }
         });
     }
 
@@ -183,11 +185,13 @@ export class Bombe {
     }
 
     _testConfig(config, message) {
+        let result;
+
         try {
             let machine = new Enigma();
             machine.configure(config);
         
-            let result = machine.processMessage(message);
+            result = machine.processMessage(message);
             if (!this.expectation.test(result)) {
                 return;
             }
@@ -195,6 +199,9 @@ export class Bombe {
             return;
         }
 
-        return {config: config, result: result};
+        return {
+            config: config,
+            result: result
+        };
     }
 }
