@@ -1,0 +1,10 @@
+@import 'common';
+
+.keyboard.letter-grid .letter-grid-row .letter-grid-item {
+    border: $default-border-size solid $metalic-silver-color;
+    outline: none;
+
+    &:active, &.active {
+        background-color: #242424;
+    }
+}

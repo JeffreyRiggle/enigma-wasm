@@ -9,6 +9,7 @@
         flex-direction: row;
         flex: 1 1 auto;
         margin-bottom: $large-padding;
+        color: $alt-text-color;
     }
 
     .plug-row:nth-of-type(2n) {

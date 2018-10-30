@@ -19,20 +19,20 @@ export class Lamp extends React.Component {
 
     render() {
         return (
-            <div className="lamp">
-                <div className="row">
+            <div className="letter-grid">
+                <div className="letter-grid-row">
                     {alphabetRow1.map(letter => 
-                        <span className={letter === this.state.selected ? 'selected' : ''} key={letter}>{letter}</span>
+                        <span className={letter === this.state.selected ? 'letter-grid-item selected' : 'letter-grid-item'} key={letter}>{letter}</span>
                     )}
                 </div>
-                <div className="row">
+                <div className="letter-grid-row">
                     {alphabetRow2.map(letter => 
-                        <span className={letter === this.state.selected ? 'selected' : ''} key={letter}>{letter}</span>
+                        <span className={letter === this.state.selected ? 'letter-grid-item selected' : 'letter-grid-item'} key={letter}>{letter}</span>
                     )}
                 </div>
-                <div className="row">
+                <div className="letter-grid-row">
                     {alphabetRow3.map(letter => 
-                        <span className={letter === this.state.selected ? 'selected' : ''} key={letter}>{letter}</span>
+                        <span className={letter === this.state.selected ? 'letter-grid-item selected' : 'letter-grid-item'} key={letter}>{letter}</span>
                     )}
                 </div>
             </div>

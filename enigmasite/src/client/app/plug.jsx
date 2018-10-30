@@ -83,10 +83,10 @@ export class Plug extends React.Component {
         }
 
         if (this.state.mappedLetter) {
-            return <button onClick={this.boundEdit}>{this.state.mappedLetter}</button>    
+            return <button onClick={this.boundEdit} className="plug-btn">{this.state.mappedLetter}</button>    
         }
 
-        return <button className="min-plug-size" onClick={this.boundEdit}><i className="fa fa-circle-o"></i></button>
+        return <button className="plug-btn min-plug-size" onClick={this.boundEdit}><i className="fa fa-circle-o"></i></button>
     }
 
     componentWillUnmount() {

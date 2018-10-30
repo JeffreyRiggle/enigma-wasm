@@ -5,8 +5,15 @@ $fa-font-path: "../../../node_modules/font-awesome/fonts";
 $default-border-size: 1px;
 $active-nav-color: rgb(189, 50, 189);
 $default-border: $default-border-size solid black;
+$small-padding: 2px;
 $default-padding: 4px;
 $large-padding: 8px;
+$alt-text-color: white;
+$metalic-silver-color: #BCC6CC;
+
+body {
+    margin: 0;
+}
 
 .error {
     border: $default-border-size solid red;
@@ -68,4 +75,26 @@ $large-padding: 8px;
 
 textarea {
     resize: none;
+}
+
+.letter-grid {
+    margin: $default-padding;
+
+    .letter-grid-row {
+        margin-bottom: $large-padding;
+
+        .letter-grid-item {
+            line-height: 16px;
+            padding: 0 6px;
+            margin-right: $default-padding;
+            border-radius: 100%;
+            border: $default-border;
+            background-color: #414141;
+            color: $alt-text-color;
+        }
+    }
+
+    .letter-grid-row:nth-last-of-type(2n) {
+        margin-left: $large-padding;
+    }
 }

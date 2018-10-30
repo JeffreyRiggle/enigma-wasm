@@ -1,11 +1,13 @@
+@import 'common';
+
 .plug {
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
 }
 
-.plug-mapped-value {
-    background-color: aqua;
+.plug-btn {
+    background-color: $metalic-silver-color;
 }
 
 .min-plug-size {

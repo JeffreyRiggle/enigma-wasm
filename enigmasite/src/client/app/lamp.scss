@@ -1,25 +1,5 @@
 @import 'common';
 
-.lamp {
-    margin: $default-padding;
-
-    .row {
-        margin-bottom: 8px;
-
-        span {
-            line-height: 16px;
-            padding: 0 6px;
-            margin-right: $default-padding;
-            border-radius: 100%;
-            border: $default-border;
-        }
-
-        .selected {
-            background-color: lightgoldenrodyellow;
-        }
-    }
-
-    .row:nth-last-of-type(2n) {
-        margin-left: $large-padding;
-    }
+.letter-grid .letter-grid-row .letter-grid-item.selected {
+    background-color: rgb(192, 194, 114);
 }
