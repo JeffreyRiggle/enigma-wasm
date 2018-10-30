@@ -10,9 +10,11 @@ $default-padding: 4px;
 $large-padding: 8px;
 $alt-text-color: white;
 $metalic-silver-color: #BCC6CC;
+$enigma-bg-color: #222;
 
 body {
     margin: 0;
+    background-color: #fafbfc;
 }
 
 .error {
@@ -33,6 +35,8 @@ body {
         .output {
             height: 300px;
             cursor: default;
+            color: $alt-text-color;
+            background-color: $enigma-bg-color;
         }
     }
 }
