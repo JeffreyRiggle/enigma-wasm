@@ -9,10 +9,20 @@ import './enigma.scss';
 export class EnigmaView extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            loading: !this.props.engine.loaded
+        };
+
+        this.props.engine.on(this.props.engine.loadedEvent, () => {
+            this.setState({
+                loading: !this.props.engine.loaded
+            });
+        })
     }
 
     render () {
-        if (!this.props.engine.loaded) {
+        if (this.state.loading) {
             return (
                 <div><h1>Loading...</h1></div>
             )

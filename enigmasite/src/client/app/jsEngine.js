@@ -1,5 +1,6 @@
 import { Enigma } from "../../../../enigmajs/src/enigma";
 import { EventEmitter } from 'events';
+import { setEnigma } from './rotormanager';
 
 const engine = new Enigma();
 
@@ -20,6 +21,7 @@ class JSEngine extends EventEmitter {
 
         this.originalMessage = '';
         this.encryptedMessage = '';
+        setEnigma(engine);
     }
 
     setRotor(ring, type, position) {

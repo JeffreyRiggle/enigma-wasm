@@ -3,34 +3,47 @@
 .reflector,
 .rotor {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: $default-padding;
     background-color: $metalic-silver-color;
 
-    .reflector-option,
-    .rotor-wheel {
-        flex: 1 1 auto;
+    .rotor-dial {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: $small-padding $default-padding;
-    }
-
-    .rotor-position {
-        color: black;
-    }
+        flex-direction: row;
+        
+        .reflector-option,
+        .rotor-wheel {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: $small-padding $default-padding;
+        }
     
-    .rotor-preview {
-        color: grey;
+        .rotor-position {
+            color: black;
+        }
+        
+        .rotor-preview {
+            color: grey;
+        }
+    
+        .reflector-option-move-area,
+        .rotor-move-area {
+            margin-left: $default-padding;
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            border-left: $default-border-size solid black;
+        }
+
+        .rotor-move-btn + .rotor-move-btn {
+            margin-top: $default-padding;
+        }
     }
 
-    .reflector-option-move-area,
-    .rotor-move-area {
-        margin-left: $default-padding;
-        flex: 1 1 auto;
-        display: flex;
-        flex-direction: column;
-        border-left: $default-border-size solid black;
+    .rotor-type {
+        margin-bottom: $default-padding;
     }
     
     .rotor-move-btn {
@@ -43,9 +56,5 @@
         &:hover {
             color: $alt-text-color;
         }
-    }
-    
-    .rotor-move-btn + .rotor-move-btn {
-        margin-top: $default-padding;
     }
 }

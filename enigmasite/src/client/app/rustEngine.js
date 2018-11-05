@@ -1,4 +1,7 @@
 import { EventEmitter } from 'events';
+import { setEnigma } from './rotormanager';
+import * as _ from 'lodash';
+
 const engimaLoader = import('../../../../enigmarust/enigmawasm/src/lib.rs');
 let engine;
 
@@ -10,15 +13,17 @@ class RustEngine extends EventEmitter {
         this.config = {
             reflector: 'B',
             rotors: [
-                {rtype: 'I', ring: 0, position: 'A'},
-                {rtype: 'II', ring: 1, position: 'A'},
-                {rtype: 'III', ring: 2, position: 'A'}
+                {type: 'I', ring: 0, position: 'A'},
+                {type: 'II', ring: 1, position: 'A'},
+                {type: 'III', ring: 2, position: 'A'}
             ],
             plugboard: []
         };
 
         engimaLoader.then(m => {
             engine = m;
+            setEnigma(this.config);
+            this.emit(this.loadedEvent);
         });
 
         this.originalMessage = '';
@@ -32,7 +37,7 @@ class RustEngine extends EventEmitter {
     setRotor(ring, type, position) {
         this.config.rotors.forEach(rotor => {
             if (rotor.ring === ring) {
-                rotor.rtype = type;
+                rotor.type = type;
                 rotor.position = position;
             }
         });
@@ -68,10 +73,12 @@ class RustEngine extends EventEmitter {
     }
 
     sendMessage(message) {
+        const config = this._transformConfig();
+
         return new Promise((resolve, reject) => {
             try {
                 var start = performance.now()
-                let retVal = engine.process_message(String(message), JSON.stringify(this.config));
+                let retVal = engine.process_message(String(message), JSON.stringify(config));
 
                 this.originalMessage += message;
                 this.encryptedMessage += retVal;
@@ -85,6 +92,18 @@ class RustEngine extends EventEmitter {
                 reject(err);
             }
         });
+    }
+
+    _transformConfig() {
+        let retVal = _.cloneDeep(this.config);
+
+        for (let rotor of retVal.rotors) {
+            let val = rotor.type;
+            delete rotor.type;
+            rotor.rtype = val;
+        }
+
+        return retVal;
     }
 
     _updateRotorPositions(offset) {
