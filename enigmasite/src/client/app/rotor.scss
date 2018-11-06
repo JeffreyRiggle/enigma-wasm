@@ -7,17 +7,19 @@
     margin: $default-padding;
     background-color: $metalic-silver-color;
 
-    .rotor-dial {
+    .rotor-dial,
+    .reflector-dial {
         display: flex;
         flex-direction: row;
         
-        .reflector-option,
+        &.reflector-option,
         .rotor-wheel {
             flex: 1 1 auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: $small-padding $default-padding;
+            text-align: center;
         }
     
         .rotor-position {
@@ -28,7 +30,6 @@
             color: grey;
         }
     
-        .reflector-option-move-area,
         .rotor-move-area {
             margin-left: $default-padding;
             flex: 1 1 auto;
@@ -40,6 +41,10 @@
         .rotor-move-btn + .rotor-move-btn {
             margin-top: $default-padding;
         }
+    }
+
+    .reflector-option-move-area {
+        display: flex;
     }
 
     .rotor-type {

@@ -46,7 +46,8 @@ class RustEngine extends EventEmitter {
     }
 
     setReflector(type) {
-
+        this.config.reflector = type;
+        this._configureImpl();
     }
 
     setPlugboard(plugs) {
