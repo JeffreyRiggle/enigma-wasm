@@ -1,10 +1,10 @@
-import React from 'react';
+import {h, Component} from 'preact';
 import {alphabetRow1, alphabetRow2, alphabetRow3} from './config.js';
 import './keyboard.scss';
 
 const isValid = /[a-z|A-Z]/i;
 
-export class Keyboard extends React.Component {
+export class Keyboard extends Component {
     constructor(props) {
         super(props);
 

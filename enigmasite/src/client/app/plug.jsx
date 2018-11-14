@@ -1,7 +1,7 @@
-import React from 'react';
+import {h, Component} from 'preact';
 import './plug.scss';
 
-export class Plug extends React.Component {
+export class Plug extends Component {
     constructor(props) {
         super(props);
 

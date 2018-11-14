@@ -1,7 +1,7 @@
-import React from 'react';
+import {h, Component} from 'preact';
 import {reflectorTypes} from './config';
 
-export class Reflector extends React.Component {
+export class Reflector extends Component {
     constructor(props) {
         super(props);
 

@@ -1,8 +1,8 @@
-import React from 'react';
+import {h, Component} from 'preact';
 import racerEngine from './racerEngine';
 import {EnigmaView} from './enigma.jsx';
 
-export class EnigmaRacer extends React.Component {
+export class EnigmaRacer extends Component {
     constructor(props) {
         super(props);
 
@@ -49,8 +49,8 @@ export class EnigmaRacer extends React.Component {
                     <div className="input-container">
                         <textarea 
                             value={this.state.message} 
-                            onChange={this.inputChanged.bind(this)} 
-                            defaultValue="Type Message here..."
+                            onInput={this.inputChanged.bind(this)} 
+                            placeholder="Type Message here..."
                             className={"input-area " + (this.state.valid ? '' : 'error')}/>
                         <button onClick={() => { this.send() }} 
                                 className="send-input"

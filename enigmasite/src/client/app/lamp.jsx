@@ -1,8 +1,8 @@
-import React from 'react';
+import {h, Component} from 'preact';
 import {alphabetRow1, alphabetRow2, alphabetRow3} from './config.js';
 import './lamp.scss';
 
-export class Lamp extends React.Component {
+export class Lamp extends Component {
     constructor(props) {
         super(props);
 

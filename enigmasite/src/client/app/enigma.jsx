@@ -1,4 +1,4 @@
-import React from 'react';
+import {h, Component} from 'preact';
 import { Rotor } from './rotor.jsx';
 import { Reflector } from './reflector.jsx';
 import { Lamp } from './lamp.jsx';
@@ -6,7 +6,7 @@ import { Keyboard } from './keyboard.jsx';
 import { Plugboard } from './plugboard.jsx';
 import './enigma.scss';
 
-export class EnigmaView extends React.Component {
+export class EnigmaView extends Component {
     constructor(props) {
         super(props);
 

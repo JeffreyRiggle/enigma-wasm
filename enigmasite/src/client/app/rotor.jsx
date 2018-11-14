@@ -1,8 +1,8 @@
-import React from 'react';
+import {h, Component} from 'preact';
 import './rotor.scss';
 import {getLastLastType, getNextType} from './rotormanager';
 
-export class Rotor extends React.Component {
+export class Rotor extends Component {
     constructor(props) {
         super(props);
 

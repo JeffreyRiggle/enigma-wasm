@@ -1,8 +1,8 @@
-import React from 'react';
+import {h, Component} from 'preact';
 import rustEngine from './rustEngine';
 import {EnigmaView} from './enigma.jsx';
 
-export class EnigmaRust extends React.Component {
+export class EnigmaRust extends Component {
     constructor(props) {
         super(props);
 

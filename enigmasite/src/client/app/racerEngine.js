@@ -8,7 +8,12 @@ class RacerEngine extends EventEmitter {
 
         this.boundMessageProcessedJS = this._messageProcessedJS.bind(this);
         this.boundMessageProcessedRS = this._messageProcessedRS.bind(this);
+        this.boundLoadedChanged = this._loadedChanged.bind(this);
+
+        rustEngine.on(rustEngine.loadedEvent, this.boundLoadedChanged);
         rustEngine.on(rustEngine.messageProcessedEvent, this.boundMessageProcessedRS);
+
+        jsEngine.on(jsEngine.loadedEvent, this.boundLoadedChanged);
         jsEngine.on(jsEngine.messageProcessedEvent, this.boundMessageProcessedJS);
     }
 
@@ -20,6 +25,10 @@ class RacerEngine extends EventEmitter {
     _messageProcessedRS(message) {
         this.encryptedMessageRS = message;
         this.emit(this.messageProcessedEvent, this.encryptedMessageJS, this.encryptedMessageRS);
+    }
+
+    _loadedChanged(state) {
+        this.emit(this.loadedEvent, this.loaded);
     }
 
     get loaded() {

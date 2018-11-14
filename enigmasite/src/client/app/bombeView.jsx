@@ -1,9 +1,9 @@
-import React from 'react';
+import {h, Component} from 'preact';
 import bombeEngine from './bombeEngine';
 import waitingImage from '../../../static/waiting.gif';
 import './bombe.scss';
 
-export class BombeView extends React.Component {
+export class BombeView extends Component {
     constructor(props) {
         super(props);
 

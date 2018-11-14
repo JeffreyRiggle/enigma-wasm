@@ -1,8 +1,8 @@
-import React from 'react';
+import {h, Component} from 'preact';
 import {EnigmaView} from './enigma.jsx';
 import jsEngine from './jsEngine';
 
-export class EnigmaJS extends React.Component {
+export class EnigmaJS extends Component {
     constructor(props) {
         super(props);
         this.state = {};

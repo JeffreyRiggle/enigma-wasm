@@ -1,35 +1,34 @@
-import React from 'react';
-import {render} from 'react-dom';
-import {BrowserRouter, NavLink, Route} from 'react-router-dom';
+import {h, render, Component} from 'preact';
+import {Router} from 'preact-router';
+import {Link} from 'preact-router/match';
 
 import {EnigmaJS} from './enigmaJS.jsx';
 import {EnigmaRust} from './enigmaRust.jsx';
 import {EnigmaRacer} from './enigmaRacer.jsx';
-import {BombeView} from './bombeView.jsx';
+import {Landing} from './landing.jsx';
 
 import './common.scss';
 
-export class App extends React.Component {
+export class App extends Component {
     render () {
         return (
             <nav className="navbar">
-                <NavLink to="/js" className="nav-item" activeClassName="active">Javascript Engine</NavLink>
-                <NavLink to="/rust" className="nav-item" activeClassName="active">Rust Engine</NavLink>
-                <NavLink to="/racer" className="nav-item" activeClassName="active">Racer Engine</NavLink>
-                <NavLink to="/bombe" className="nav-item" activeClassName="active">Bombe Engine</NavLink>
+                <Link href="/js" className="nav-item" activeClassName="active">Javascript Engine</Link>
+                <Link href="/rust" className="nav-item" activeClassName="active">Rust Engine</Link>
+                <Link href="/racer" className="nav-item" activeClassName="active">Racer Engine</Link>
             </nav>
         );
     }
 }
 
 render((
-    <BrowserRouter basename="/">
-        <div>
-            <App/>
-            <Route path="/js" component={EnigmaJS}/>
-            <Route path="/rust" component={EnigmaRust}/>
-            <Route path="/racer" component={EnigmaRacer}/>
-            <Route path="/bombe" component={BombeView}/>
-        </div>
-    </BrowserRouter>
+    <div>
+        <App/>
+        <Router>
+            <Landing default/>
+            <EnigmaJS path="/js"/>
+            <EnigmaRust path="/rust"/>
+            <EnigmaRacer path="/racer"/>
+        </Router>
+    </div>
 ), document.getElementById('app'));

@@ -1,10 +1,10 @@
-import React from 'react';
+import {h, Component} from 'preact';
 import {alphabetRow1, alphabetRow2, alphabetRow3} from './config.js';
 import { Plug } from './plug.jsx';
 import { PlugManager } from './plugManager.js';
 import './plugboard.scss';
 
-export class Plugboard extends React.Component {
+export class Plugboard extends Component {
     constructor(props) {
         super(props);
 
