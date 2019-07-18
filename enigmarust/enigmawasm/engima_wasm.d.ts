@@ -1,3 +1,7 @@
 /* tslint:disable */
-export function process_message(arg0: string, arg1: string): string;
-
+/**
+* @param {string} initial 
+* @param {string} config 
+* @returns {string} 
+*/
+export function process_message(initial: string, config: string): string;

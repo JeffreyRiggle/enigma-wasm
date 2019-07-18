@@ -24,7 +24,7 @@ export class App extends Component {
 render((
     <div>
         <App/>
-        <Router>
+        <Router basename="/robit">
             <Landing default/>
             <EnigmaJS path="/js"/>
             <EnigmaRust path="/rust"/>
