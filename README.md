@@ -8,4 +8,4 @@ A version of this app can be found at http://ilusr.com/enigma/
 I just threw something up there so there might be issues with the site when attempting to refresh a page or attempt a lighthouse score.
 Also this does not appear to work in Edge. I think Edge should have WASM support but I have not looked into that yet.
 
-![](example.gif)
+![](./example.gif)
